@@ -15,11 +15,7 @@ devtools::install_github("hamamoto-lab/methPLIER")
 ## What the 'methPLIER' can do.
 ![schema](https://user-images.githubusercontent.com/7193590/172372421-db129640-486f-4f8c-a8f3-015fba7c58ab.png)
 
-### 1. Inter-dataset analysis
 
-### 2. Int
-
-## Usage
 
 ## Citation
 
