@@ -1,7 +1,7 @@
 Package: methPLIER
 Type: Package
 Title: DNA methylation data analysis tool with non-negative matrix factoriztion
-Version: 0.1.0
+Version: 0.1.1
 Author: Ken Takasawa
 Maintainer: Ken Takasawa <ktakazaw@ncc.go.jp>
 Description: The "methPLIER" is a set of packages for DNA methylome data analyzing by non-negative matrix factorization (NMF) with knowledge-matrix constrains. This package provide producing loading matrix B and heatmap plotting.
