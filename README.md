@@ -7,12 +7,12 @@ R package for DNA methylation data analysis using NMF with sparse regularization
 
 ### Option 1: Install local
 ```R
-# Install devtools from CRAN
-install.packages("devtools")
+# Install remotes from CRAN
+install.packages("remotes")
 
 # Or the development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("hamamoto-lab/methPLIER")
+remotes::install_github("hamamoto-lab/methPLIER")
 ```
 
 ### Option 2: Docker

@@ -4,6 +4,8 @@
 #' @author Ken Takasawa
 
 #### Slightly modified multiPLIER function -----------------------------------------------------------
+#' PLIERNewData
+#' 
 #' @description A wrapper function for applying PLIER to a data set.
 #' We use the following genesets that come with PLIER: bloodCellMarkersIRISDMAP, svmMarkers,
 #' and canonicalPathways.
@@ -55,7 +57,8 @@ PLIERNewData <- function(D, C = 'all', seed = 12345) {
 }
 
 
-
+#' GetOrderedRowNorm
+#' 
 #' @description Given a DNA methylation matrix of data that was not used to train a PLIER model
 #' and the output of PLIER::PLIER, row-normalize, remove genes not in the
 #' training data, set missing genes to zero (the mean), and reorder to match
@@ -94,7 +97,8 @@ GetOrderedRowNorm <- function(D, plier.model) {
 }
 
 
-
+#' getNewDataB
+#' 
 #' @description Apply a previously computed PLIER to a new dataset to get the LV x sample
 #' matrix (B)
 #' see main PLIER function:
@@ -125,7 +129,8 @@ getNewDataB <- function(D, plier.model) {
 }
 
 #### My difined function -----------------------------------------------------------
-
+#' rowNorm
+#' 
 #' @description Row normalization to apply PLIERNewData function.
 #' Subtracting mean value of the row from data, and dividing by standard deviation value of the row.
 #'
@@ -142,7 +147,8 @@ rowNorm <- function(x){
   return(x)
 }
 
-
+#' getDmatrix
+#' 
 #' @description Getting D matrix for applying to methPLIER
 #'
 #' @import tidyverse
@@ -184,7 +190,8 @@ getDmatrix <- function(data){
 }
 
 
-
+#' getGenesInLV
+#' 
 #' @description This function gets list of genes of LV
 #'
 #' @import tidyverse
@@ -203,7 +210,8 @@ getGenesInLV <- function(methPLIER, LV, frac = 0.8){
 }
 
 
-
+#' getPathway
+#' 
 #' @description This function gets pathway of top genes of LV
 #'
 #' @import tidyverse
@@ -243,7 +251,8 @@ getPathway <- function(genes, showCategory=15){
 }
 
 
-
+#' getDMGsInLV
+#' 
 #' @description Wrapper function of getDMGs for TopLVs
 #'
 #' @param methPLIER methPLIER object
@@ -265,7 +274,8 @@ getDMGsInLV <- function(methPLIER, D, LV, annot, frac=0.8, threshold=0.05, metho
 }
 
 
-
+#' getDMGs
+#' 
 #' @description This function gets differentially methylated score genes
 #'
 #' @import tidyverse
@@ -298,7 +308,8 @@ getDMGs <- function(D, annot, threshold=0.05, method='fdr'){
 
 
 
-
+#' getDMPs
+#' 
 #' @description This function gets differentially methylated probes
 #'
 #' @import tidyverse
@@ -337,7 +348,8 @@ getDMPs <- function(data, annot, genes, threshold=0.05, method='fdr'){
 
 
 
-
+#' getTopLVs
+#' 
 #' @description This function get top-LVs
 #'
 #' @import tidyverse
@@ -362,7 +374,8 @@ getTopLVs <- function(cluster.LV, col.1, col.2, threshold = 0.05, method = 'fdr'
 
 
 ### Wrapper function for plotting data with Gviz package --------
-
+#' plotDetails
+#' 
 #' @description This function takes the output of gene name, methylation data, and sample group,
 #' and plot methylation value on genomic position.
 #'
@@ -383,7 +396,8 @@ plotDetails <- function(identifier, methylation, sgroups, fill=NULL, ...) {
 }
 
 
-
+#' makeGvizObj
+#' 
 #' @description This function generate Gviz object
 #'
 #' @importFrom Gviz
@@ -395,7 +409,7 @@ plotDetails <- function(identifier, methylation, sgroups, fill=NULL, ...) {
 #' @importFrom GenomicRanges
 #'   GRanges
 #' @importFrom IRanges
-#'   Iranges
+#'   IRanges
 #' @importFrom GenomeInfoDb
 #'   Seqinfo
 #' @import tidyverse
@@ -451,7 +465,8 @@ makeGvizObj <- function(gene, data, genome='hg38', ...) {
 
 
 
-
+#' plotGvizObj
+#' 
 #' @description This function plots Gviz object
 #'
 #' @importFrom Gviz
@@ -463,7 +478,7 @@ makeGvizObj <- function(gene, data, genome='hg38', ...) {
 #' @importFrom GenomicRanges
 #'   GRanges
 #' @importFrom IRanges
-#'   Iranges
+#'   IRanges
 #' @importFrom GenomeInfoDb
 #'   Seqinfo
 #' @import tidyverse
@@ -497,7 +512,8 @@ plotGvizObj <- function(gvizObj, type = c('a', 'p'), filename=NULL, dir=NULL, pf
 }
 
 
-
+#' plotHeatmap
+#' 
 #' @description This function plots Heatmap of B matrix with or without sample annotation
 #'
 #' @import ComplexHeatmap
@@ -554,7 +570,8 @@ plotHeatmap <- function(B, k = 2, k.lv = 4, annot.df=NULL, col=NULL){
 }
 
 
-
+#' plotSurvival
+#' 
 #' @description This function plots Survival plot
 #'
 #' @import survival
@@ -584,7 +601,8 @@ plotSurvival <- function(cl,
 
 
 
-
+#' plotBoxplot
+#' 
 #' @description This function plots Boxplot
 #'
 #' @import tidyverse
@@ -611,7 +629,8 @@ plotBoxplot <- function(B, LV, cl){
 
 
 
-
+#' plotBoxplot.gviz
+#' 
 #' @description This function plots detail Track and GeneRegion Track
 #'
 #' @import tidyverse
