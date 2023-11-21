@@ -27,10 +27,13 @@ remotes::install_github("hamamoto-lab/methPLIER")
 ### Option 2: Docker
 ```
 # build docker image from Dockerfile
-docker image build -t methplier:0.9 .
+docker build -t methplier:0.9 .
 
 # run docker image (i.e. password as "methPLIER")
-docker run --rm -it -e PASSWORD=methPLIER -p 8787:8787 --name methplier:0.9
+docker run --rm -it -e PASSWORD=methPLIER -p 8787:8787 --name methplier methplier:0.9
+
+# username: rstudio
+# password: methPLIER (or your passward setting above)
 ```
 
 ## What the 'methPLIER' can do.
