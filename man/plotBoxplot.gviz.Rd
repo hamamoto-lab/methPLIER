@@ -27,6 +27,8 @@ plotBoxplot.gviz(
 
 \item{sizes}{vector of sizes for detail Track and GeneRegion Track (default is c(5, 1))}
 
+\item{fill}{vector of fill color for bwplot (default is NULL)}
+
 \item{filename}{optional, filename for saving plot (default is NULL).
 If you want to save plot, also 'dir' must be passed this function.}
 
@@ -39,9 +41,7 @@ If you want to save plot, also 'filename' must be passed this function.}
 
 \item{height}{height of plot, numeric}
 
-\item{...}{arguments for lattice::bwplot()#'}
-
-\item{fill:}{vector of fill color for bwplot (default is NULL)}
+\item{...}{arguments for lattice::bwplot()}
 }
 \value{
 plot box plot with Gviz

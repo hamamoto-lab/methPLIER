@@ -384,6 +384,8 @@ getTopLVs <- function(cluster.LV, col.1, col.2, threshold = 0.05, method = 'fdr'
 #' @param identifier TargetID of DNA methylation data.
 #' @param methylation matrix of DNA methylation. Row as TargetID, Column as Sample. Only numeric (DNA methylation value)
 #' @param sgroups vector of sample group
+#' @param fill vector of fill color for bwplot (default is NULL)
+#' @param ... arguments for lattice::bwplot()
 #' @return plot bwplot
 #' @export
 
@@ -577,9 +579,9 @@ plotHeatmap <- function(B, k = 2, k.lv = 4, annot.df=NULL, col=NULL){
 #' @import survival
 #' @import tidyverse
 #' @param cl data for survival analysis. Data must following columns.
-#' @param cluster numeric. Cluster number to which the sample belongs.
-#' @param Time numeric. Time to event.
-#' @param Event numeric. Event value for survival analysis.
+#'    "cluster" column: Cluster number to which the sample belongs. Each value should be numeric.
+#'    "Event" column: Event value for survival analysis. 0 or 1.
+#'    "Time" column: Time to event. Each value should be numeric. 
 #' @param xlab label of x-axis
 #' @param ylab label of y-axis
 #' @return plot survival plot
@@ -638,7 +640,7 @@ plotBoxplot <- function(B, LV, cl){
 #' @param sgroups vector of sample group
 #' @param target.id vector of TargetID what you want to plot
 #' @param sizes vector of sizes for detail Track and GeneRegion Track (default is c(5, 1))
-#' @param fill: vector of fill color for bwplot (default is NULL)
+#' @param fill vector of fill color for bwplot (default is NULL)
 #' @param filename optional, filename for saving plot (default is NULL).
 #'   If you want to save plot, also 'dir' must be passed this function.
 #' @param dir output directory path (default is NULL).
@@ -646,7 +648,7 @@ plotBoxplot <- function(B, LV, cl){
 #' @param pfx optional, prefix for saving plot filenames (default is NULL)
 #' @param width width of plot, numeric
 #' @param height height of plot, numeric
-#' @param ... arguments for lattice::bwplot()#'
+#' @param ... arguments for lattice::bwplot()
 #' @return plot box plot with Gviz
 #' @export
 
@@ -673,7 +675,7 @@ plotBoxplot.gviz <- function(gvizObj, sgroups, target.id, sizes=c(5, 1), fill=NU
                           id = rownames(methylation[id, ]), fun = plotDetails,
                           detailsFunArgs = list(methylation = methylation[id, ],
                                                 sgroups = sgroups, fill = fill))
-  Gviz:::plotTracks(list(deTrack,
+  Gviz::plotTracks(list(deTrack,
                          gvizObj$GeneRegionTrack),
                     sizes = sizes, ...)
   if(exists('fn')){

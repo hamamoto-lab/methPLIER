@@ -11,17 +11,14 @@ plotSurvival(
 )
 }
 \arguments{
-\item{cl}{data for survival analysis. Data must following columns.}
+\item{cl}{data for survival analysis. Data must following columns.
+"cluster" column: Cluster number to which the sample belongs. Each value should be numeric.
+"Event" column: Event value for survival analysis. 0 or 1.
+"Time" column: Time to event. Each value should be numeric.}
 
 \item{xlab}{label of x-axis}
 
 \item{ylab}{label of y-axis}
-
-\item{cluster}{numeric. Cluster number to which the sample belongs.}
-
-\item{Time}{numeric. Time to event.}
-
-\item{Event}{numeric. Event value for survival analysis.}
 }
 \value{
 plot survival plot

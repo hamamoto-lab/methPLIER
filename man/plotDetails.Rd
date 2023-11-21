@@ -12,6 +12,10 @@ plotDetails(identifier, methylation, sgroups, fill = NULL, ...)
 \item{methylation}{matrix of DNA methylation. Row as TargetID, Column as Sample. Only numeric (DNA methylation value)}
 
 \item{sgroups}{vector of sample group}
+
+\item{fill}{vector of fill color for bwplot (default is NULL)}
+
+\item{...}{arguments for lattice::bwplot()}
 }
 \value{
 plot bwplot
