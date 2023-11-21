@@ -10,8 +10,17 @@ R package for DNA methylation data analysis using NMF with sparse regularization
 # Install remotes from CRAN
 install.packages("remotes")
 
-# Or the development version from GitHub:
-# install.packages("devtools")
+# Pre-requiring package install
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("enrichplot")
+BiocManager::install("DOSE")
+BiocManager::install("ggtree")
+BiocManager::install("Gviz")
+remotes::install_github("wgmao/PLIER")
+
+# Install methPLIER
 remotes::install_github("hamamoto-lab/methPLIER")
 ```
 
