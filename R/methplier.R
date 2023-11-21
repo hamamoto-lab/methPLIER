@@ -665,3 +665,4 @@ plotBoxplot.gviz <- function(gvizObj, sgroups, target.id, sizes=c(5, 1), fill=NU
 #### Initialize Load -----------------------------------------------------------
 data(pca.ord)
 data(pca.w)
+data(methPLIER)
