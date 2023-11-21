@@ -14,10 +14,10 @@ install.packages("remotes")
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("enrichplot")
-BiocManager::install("DOSE")
-BiocManager::install("ggtree")
-BiocManager::install("Gviz")
+BiocManager::install("enrichplot", type = 'source')
+BiocManager::install("DOSE", type = 'source')
+BiocManager::install("ggtree", type = 'source')
+BiocManager::install("Gviz", type = 'source')
 remotes::install_github("wgmao/PLIER")
 
 # Install methPLIER
