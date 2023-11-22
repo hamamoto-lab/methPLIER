@@ -24,7 +24,7 @@ Imports:
     DOSE (>= 3.24.2), 
     GenomicRanges (>= 1.50.2), 
     IRanges (>= 2.32.0), 
-    enrichplot (>= 1.18.4)
+    enrichplot (>= 1.18.4),
     PLIER (>= 0.99.0)
 Suggests: knitr, rmarkdown
 License: GPL-3
