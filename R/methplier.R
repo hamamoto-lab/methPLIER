@@ -247,7 +247,7 @@ getPathway <- function(genes, showCategory=15){
   edox2 <- enrichplot::pairwise_termsim(edox)
   offspring.tbl_tree_item <- getFromNamespace("offspring", "tidytree")
   assign("offspring.tbl_tree_item", offspring.tbl_tree_item, envir = .GlobalEnv)
-  treeplot <- enrichplot::treeplot(edox2, cluster.params = list(_method = 'ward.D2'))
+  treeplot <- enrichplot::treeplot(edox2, cluster.params = list(method = 'ward.D2'))
 
   return(list(edo = edo, edox = edox, edox2 = edox2,
               barplot = barplot, dotplot = dotplot, treeplot=treeplot))
