@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 RUN R -e "install.packages(c('devtools', 'BiocManager'), repos='http://cran.rstudio.com/')"
 
 # Execute installation using devtools
-RUN R -e "devtools::install_github('hamamoto-lab/methPLIER')"
+RUN R -e "remotes::install_github('hamamoto-lab/methPLIER')"
 
 # Bind current directory
 VOLUME ["/app"]
