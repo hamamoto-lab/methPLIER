@@ -431,6 +431,7 @@ makeGvizObj <- function(gene, data, genome='hg38', ...) {
   if (!exists('geneAnnot')){
     data("geneAnnot")
   }
+  library(Gviz)
   probe <- tibble(genesUniq = gene) %>% inner_join(methProbeAnnot, .) %>% unnest(data) %>%
     distinct(CpG_chrm, CpG_beg, CpG_end, probe_strand, TargetID)
   gene <- geneAnnot %>% inner_join(tibble(symbol = gene)) %>% unnest(data) %>% distinct()
