@@ -1,8 +1,6 @@
 # methPLIER
 R package for DNA methylation data analysis using NMF with sparse regularization
 
-## Library dependencies
-
 ## Installation
 
 ### Option 1: Install local
@@ -14,10 +12,6 @@ install.packages("remotes")
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("enrichplot", type = 'source')
-BiocManager::install("DOSE", type = 'source')
-BiocManager::install("ggtree", type = 'source')
-BiocManager::install("Gviz", type = 'source')
 remotes::install_github("wgmao/PLIER")
 
 # Install methPLIER
