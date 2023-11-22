@@ -8,7 +8,7 @@ output:
     number_sections: true
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{The methPLIER usages}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,7 +26,6 @@ knitr::opts_chunk$set(
 )
 
 library(knitr)
-library(rmdformats)
 library(tidyverse)
 library(magrittr)
 ```
@@ -38,11 +37,8 @@ library(magrittr)
 # Installation
 To install this package, start R (>= 3.5.0) and enter:
 ```{r}
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
 if (!require("methPLIER", quietly = TRUE))
-    install.packages("methPLIER")
+    remotes::install_github('hamamoto-lab/methPLIER')
 ```
 
 ```{r}
@@ -169,16 +165,16 @@ pathway$treeplot
 ## Make Gviz object
 ```{r cache=TRUE}
 # Get gene list contained in the ontology 'Metastatic malignant neoplasm to brain'
-gene.list <- pathway$edox2@result %>% top_n(1, -(qvalue)) %>% 
-  pull(geneID) %>% str_split(., '\\/') %>% unlist()
-gz <- gene.list %>% map(~ .x %>% makeGvizObj(., gse39279.data))
-names(gz) <- gene.list
+# gene.list <- pathway$edox2@result %>% top_n(1, -(qvalue)) %>% 
+#   pull(geneID) %>% str_split(., '\\/') %>% unlist()
+# gz <- gene.list %>% map(~ .x %>% makeGvizObj(., gse39279.data))
+# names(gz) <- gene.list
 ```
 
 ## Plot
 ```{r}
 # Plot ERBB2 as example
-gz$ERBB2 %>% plotGvizObj(.)
+# gz$ERBB2 %>% plotGvizObj(.)
 
 # If you want to plot all of the listed gene, execute below script.
 ## dir.create('figures/gviz_1/', recursive = TRUE)
@@ -187,8 +183,8 @@ gz$ERBB2 %>% plotGvizObj(.)
 
 ## Plot Gviz with boxplot
 ```{r}
-plotBoxplot.gviz(gz$ERBB2, as.factor(ph$cluster.sample$cluster.sample), 
-                 gz$ERBB2$probe$TargetID[1:5])
+# plotBoxplot.gviz(gz$ERBB2, as.factor(ph$cluster.sample$cluster.sample), 
+#                  gz$ERBB2$probe$TargetID[1:5])
 ```
 
 

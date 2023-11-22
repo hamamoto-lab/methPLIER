@@ -424,7 +424,7 @@ plotDetails <- function(identifier, methylation, sgroups, fill=NULL, ...) {
 #' @return list of Gviz object
 #' @export
 
-makeGvizObj <- function(gene, data, genome='hg38', ...) {
+makeGvizObj <- function(gene, data, genome='hg38') {
   if (!exists('methProbeAnnot')){
     data("methProbeAnnot")
   }

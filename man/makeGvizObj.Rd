@@ -4,7 +4,7 @@
 \alias{makeGvizObj}
 \title{makeGvizObj}
 \usage{
-makeGvizObj(gene, data, genome = "hg38", ...)
+makeGvizObj(gene, data, genome = "hg38")
 }
 \arguments{
 \item{gene}{vector of gene name, i.e. c('PGAP3', 'ERBB2')}
