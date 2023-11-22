@@ -230,6 +230,7 @@ getGenesInLV <- function(methPLIER, LV, frac = 0.8){
 #' @export
 
 getPathway <- function(genes, showCategory=15){
+  library(org.Hs.eg.db)
   
   # get entrez id table
   data(geneIdTable)

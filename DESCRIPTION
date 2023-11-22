@@ -26,6 +26,7 @@ Imports:
     GenomicRanges (>= 1.50.2), 
     IRanges (>= 2.32.0), 
     enrichplot (>= 1.18.4),
+    org.Hs.eg.db (>= 3.16.0),
     PLIER (>= 0.99.0)
 Suggests: knitr, rmarkdown
 License: GPL-3
