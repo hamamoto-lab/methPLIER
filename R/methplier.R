@@ -230,6 +230,7 @@ getGenesInLV <- function(methPLIER, LV, frac = 0.8){
 #' @export
 
 getPathway <- function(genes, showCategory=15){
+  
   # get entrez id table
   data(geneIdTable)
 
@@ -687,10 +688,3 @@ plotBoxplot.gviz <- function(gvizObj, sgroups, target.id, sizes=c(5, 1), fill=NU
 data(pca.ord)
 data(pca.w)
 data(methPLIER)
-
-nodeid.tbl_tree <- utils::getFromNamespace("nodeid.tbl_tree", "tidytree")
-rootnode.tbl_tree <- utils::getFromNamespace("rootnode.tbl_tree", "tidytree")
-offspring.tbl_tree <- utils::getFromNamespace("offspring.tbl_tree", "tidytree")
-offspring.tbl_tree_item <- utils::getFromNamespace(".offspring.tbl_tree_item", "tidytree")
-child.tbl_tree <- utils::getFromNamespace("child.tbl_tree", "tidytree")
-parent.tbl_tree <- utils::getFromNamespace("parent.tbl_tree", "tidytree")

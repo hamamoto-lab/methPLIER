@@ -13,6 +13,7 @@ Remotes:
 biocViews:
 Imports: 
     survival (>= 3.3-1), 
+    tidytree,
     ComplexHeatmap (>= 2.10.0),
     Gviz (>= 1.38.4), 
     lattice (>= 0.20-45), 
