@@ -6,8 +6,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     unzip \
-    libbz2-dev \
-    liblzma-dev
+    libbz2-dev
 
 # Install R packages
 RUN R -e "install.packages(c('devtools', 'BiocManager'), repos='http://cran.rstudio.com/')"
