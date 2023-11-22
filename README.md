@@ -31,10 +31,12 @@ docker build -t methplier:0.9 .
 
 # run docker image (i.e. password as "methPLIER")
 docker run --rm -it -e PASSWORD=methPLIER -p 8787:8787 --name methplier methplier:0.9
-
-# username: rstudio
-# password: methPLIER (or your passward setting above)
 ```
+Access to [localhost:8787](localhost:8787) on web browser
+|   |default value|
+|---|---|
+|username|rstudio|
+|password|methPLIER|
 
 ## What the 'methPLIER' can do.
 ![schema](https://user-images.githubusercontent.com/7193590/172372421-db129640-486f-4f8c-a8f3-015fba7c58ab.png)
