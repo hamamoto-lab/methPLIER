@@ -203,8 +203,8 @@ getDmatrix <- function(data){
 
 getGenesInLV <- function(methPLIER, LV, frac = 0.8){
   genes <- methPLIER$Z[, LV] %>% tibble(Gene = names(.), value = .) %>%
-    mutate(value = value /sum(value)) %>% arrange(desc(value)) %>%
-    mutate(cum = cumsum(value)) %>% filter(cum <= frac) %>%
+    dplyr::mutate(value = value /sum(value)) %>% arrange(desc(value)) %>%
+    dplyr::mutate(cum = cumsum(value)) %>% filter(cum <= frac) %>%
     distinct(Gene) %>% pull(Gene)
   return(genes)
 }
@@ -245,7 +245,9 @@ getPathway <- function(genes, showCategory=15){
 
   edox <- DOSE::setReadable(edo, 'org.Hs.eg.db', 'ENTREZID')
   edox2 <- enrichplot::pairwise_termsim(edox)
-  treeplot <- enrichplot::treeplot(edox2, hclust_method = 'ward.D2')
+  offspring.tbl_tree_item <- getFromNamespace("offspring", "tidytree")
+  assign("offspring.tbl_tree_item", offspring.tbl_tree_item, envir = .GlobalEnv)
+  treeplot <- enrichplot::treeplot(edox2, cluster.params = list(_method = 'ward.D2'))
 
   return(list(edo = edo, edox = edox, edox2 = edox2,
               barplot = barplot, dotplot = dotplot, treeplot=treeplot))
@@ -296,13 +298,13 @@ getDMGs <- function(D, annot, threshold=0.05, method='fdr'){
     pivot_longer(cols = c(-Gene, -id.gene), names_to = 'AccessionNo') %>%
     inner_join(annot) %>%
     group_by(cluster.sample, Gene, id.gene) %>%
-    summarise(value = list(value)) %>% ungroup() %>%
+    dplyr::summarise(value = list(value)) %>% ungroup() %>%
     pivot_wider(names_from = cluster.sample, values_from = value) %>%
     rowwise() -> D
   tx <- annot %>% distinct(cluster.sample) %>% pull(cluster.sample) %>% as.vector()
-  script <- paste0('D <- D %>% mutate(p.value = t.test(`', tx[1], '`, `', tx[2], '`)$p.value)')
+  script <- paste0('D <- D %>% dplyr::mutate(p.value = t.test(`', tx[1], '`, `', tx[2], '`)$p.value)')
   eval(parse(text = script))
-  D %>% ungroup() %>% mutate(q.value = p.adjust(p.value, method = method)) %>%
+  D %>% ungroup() %>% dplyr::mutate(q.value = p.adjust(p.value, method = method)) %>%
     filter(q.value < threshold) -> result
   return(result)
 }
@@ -336,13 +338,13 @@ getDMPs <- function(data, annot, genes, threshold=0.05, method='fdr'){
   data %>% as_tibble(rownames = 'TargetID') %>% inner_join(tibble(TargetID = probes)) %>%
     pivot_longer(-TargetID, names_to = 'AccessionNo') %>%
     inner_join(annot) %>% group_by(cluster.sample, TargetID) %>%
-    summarise(value = list(value)) %>%
+    dplyr::summarise(value = list(value)) %>%
     pivot_wider(names_from = cluster.sample, values_from = value) %>%
     rowwise() -> d
   tx <- annot %>% distinct(cluster.sample) %>% pull(cluster.sample) %>% as.vector()
-  script <- paste0('d <- d %>% mutate(p.value = stats::t.test(`', tx[1], '`, `', tx[2], '`)$p.value)')
+  script <- paste0('d <- d %>% dplyr::mutate(p.value = stats::t.test(`', tx[1], '`, `', tx[2], '`)$p.value)')
   eval(parse(text = script))
-  d %>% ungroup() %>% mutate(q.value = p.adjust(p.value, method = method)) %>%
+  d %>% ungroup() %>% dplyr::mutate(q.value = p.adjust(p.value, method = method)) %>%
     filter(q.value < threshold) %>% inner_join(probe.tbl) -> result
   return(result)
 }
@@ -363,8 +365,8 @@ getDMPs <- function(data, annot, genes, threshold=0.05, method='fdr'){
 #' @export
 
 getTopLVs <- function(cluster.LV, col.1, col.2, threshold = 0.05, method = 'fdr'){
-  script <- paste0('res <- cluster.LV %>% rowwise() %>% mutate(p.value = t.test(`',
-                   col.1, '`,`', col.2, '`)$p.value) %>% ungroup() %>% mutate(q.value = p.adjust(p.value, method = "',
+  script <- paste0('res <- cluster.LV %>% rowwise() %>% dplyr::mutate(p.value = t.test(`',
+                   col.1, '`,`', col.2, '`)$p.value) %>% ungroup() %>% dplyr::mutate(q.value = p.adjust(p.value, method = "',
                    method, '")) %>% filter(q.value < ', threshold, ') %>% arrange(q.value)')
   eval(parse(text = script))
   return(res)
@@ -562,12 +564,12 @@ plotHeatmap <- function(B, k = 2, k.lv = 4, annot.df=NULL, col=NULL){
 
   cluster.sample <- h.p %>% ComplexHeatmap::column_order() %>% imap(~ tibble(cluster.sample = .y, rowid.sample = .x)) %>%
     purrr::reduce(bind_rows) %>% arrange(rowid.sample) %>%
-    mutate(AccessionNo = colnames(B))
+    dplyr::mutate(AccessionNo = colnames(B))
   cluster.LV <- h.p %>% ComplexHeatmap::row_order() %>% imap(~ tibble(cluster.LV = .y, LV = .x)) %>%
     purrr::reduce(bind_rows) %>% arrange(LV) %>%
     bind_cols(B) %>% pivot_longer(cols = c(-1:-2), names_to = 'AccessionNo') %>%
     inner_join(cluster.sample) %>% group_by(LV, cluster.sample) %>%
-    summarise(value = list(value)) %>% ungroup() %>%
+    dplyr::summarise(value = list(value)) %>% ungroup() %>%
     pivot_wider(names_from = cluster.sample, values_from = value)
   return(list(h = h.p, cluster.sample = cluster.sample, cluster.LV = cluster.LV))
 }
@@ -617,7 +619,7 @@ plotSurvival <- function(cl,
 
 plotBoxplot <- function(B, LV, cl){
   d <- B[LV, ] %>% as_tibble(rownames = 'AccessionNo') %>%
-    inner_join(cl) %>% mutate(cluster.sample = as.factor(cluster.sample))
+    inner_join(cl) %>% dplyr::mutate(cluster.sample = as.factor(cluster.sample))
   d %>% ggplot(aes(y = value, fill = cluster.sample)) + geom_boxplot() +
     theme_bw() +
     theme(axis.text.x = element_blank(),
