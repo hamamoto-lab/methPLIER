@@ -42,3 +42,5 @@ download dataset from figshare and put it in `data` directory
 ## Citation
 
 ## License
+MIT License
+
